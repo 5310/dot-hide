@@ -1,0 +1,23 @@
+# See https://atom.io/docs/latest/hacking-atom-package-word-count#menus for more details
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'Dot Hide'
+      'submenu': [
+            {
+              'label': 'Hide'
+              'command': 'dot-hide:hide'
+            },
+            {
+              'label': 'Show'
+              'command': 'dot-hide:show'
+            },
+            {
+              'label': 'Toggle'
+              'command': 'dot-hide:toggle'
+            }
+      ]
+    ]
+  }
+]
