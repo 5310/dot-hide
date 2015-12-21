@@ -1,7 +1,7 @@
 {
   "name": "dot-hide",
   "main": "./lib/dot-hide",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Appends names from `.hidden` to the core ignored names list.",
   "keywords": [
     ".hidden",
@@ -13,6 +13,5 @@
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
