@@ -33,7 +33,6 @@ class DotHide
     atom.config.set 'dot-hide.hidden', false
 
   toggle : =>
-    console.log("TOGGLING")
     if atom.config.get 'dot-hide.hidden' then @show() else @hide()
 
   onActivate : =>
