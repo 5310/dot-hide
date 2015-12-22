@@ -1,7 +1,9 @@
 # Dot Hide
 
-Appends names from [`.hidden`](https://en.wikipedia.org/wiki/Hidden_file_and_hidden_directory#GNOME) to the core ignored names list if one exists on the root of an open project.
+Appends names from `.hidden` to the core ignored names list.
 
-As a result, any package that makes use of the core ignored names list to hide files (such as `tree-view`) will also ignore the names in `.hidden`.
+Automatically or manually appends entries from [`.hidden`](https://en.wikipedia.org/wiki/Hidden_file_and_hidden_directory#GNOME) to the core ignored names list if one exists on the root of the [first](https://github.com/5310/dot-hide/issues/1) open project.
 
-Any custom names added to the core ignored names list persists and is reverted to when the `.hidden` entries are unappended. However, any customizations made to the core ignored names list will be lost when this happens. If you want to customize your core ignored names list do so while this functionality is inactive: is set to `show` rather than `hide`.
+Yes, it's rather hacky, but it's the easiest way to get what I want. I use to keep my projects clutter-free; I often need to edit some `.gitignore`d scratch/note files, or don't need to see some files that get pushed but are auto-generated. I use `.hidden` lists for the file browser in these cases anyway, and wanted the same for Atom.
+
+Any custom names on the core ignored names list persist the addition, of course, and when the addition is undone it reverts to that state. However, this also means that any customizations done to the core ignored names list while the functionality is active (hiding entries from `.hidden`) is lost when it reverts.
