@@ -46,7 +46,6 @@ module.exports =
       type : 'boolean'
       default : true
   activate: (state) ->
-    console.log('Dot Hide activated!')
     @dotHide = new DotHide()
     @dotHide.onActivate()
     atom.commands.add "atom-workspace", "dot-hide:show", @dotHide.show
