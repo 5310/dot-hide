@@ -1,7 +1,18 @@
 fs = require 'fs'
 
+
 class DotHide
+
   atom.deserializers.add this
+  @version: 1
+  @deserialize: (state) -> new DotHide(state)
+  serialize: -> { version: @constructor.version, deserializer: 'DotHide', hidden: true }
+
+  @hidden: false
+
+  constructor: ({hidden} = {hidden: false}) ->
+    @hidden = hidden
+    console.log "constructing to", @hidden
 
   hide : =>
     collectedDotHiddenIgnoredNames = []
@@ -40,14 +51,20 @@ class DotHide
 
 
 module.exports =
+
   config :
     autoHide :
       description: 'Automatically append `.hidden` file at startup.'
       type : 'boolean'
       default : true
+
   activate: (state) ->
-    @dotHide = new DotHide()
-    @dotHide.onActivate()
+    @dotHide =
+      if @unserialized = atom.deserializers.deserialize(state) then @unserialized
+      else new DotHide()
     atom.commands.add "atom-workspace", "dot-hide:show", @dotHide.show
     atom.commands.add "atom-workspace", "dot-hide:hide", @dotHide.hide
     atom.commands.add "atom-workspace", "dot-hide:toggle", @dotHide.toggle
+    @dotHide.onActivate()
+
+  serialize: -> @dotHide.serialize()
