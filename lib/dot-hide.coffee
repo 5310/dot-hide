@@ -6,13 +6,12 @@ class DotHide
   atom.deserializers.add this
   @version: 1
   @deserialize: (state) -> new DotHide(state)
-  serialize: -> { version: @constructor.version, deserializer: 'DotHide', hidden: true }
+  serialize: -> { version: @constructor.version, deserializer: 'DotHide', hidden: @hidden }
 
   @hidden: false
 
   constructor: ({hidden} = {hidden: false}) ->
     @hidden = hidden
-    console.log "constructing to", @hidden
 
   hide : =>
     collectedDotHiddenIgnoredNames = []
@@ -30,7 +29,7 @@ class DotHide
       atom.config.set 'dot-hide.savedIgnoredNames', coreIgnoredNames
       collectedDotHiddenIgnoredNames = coreIgnoredNames.concat collectedDotHiddenIgnoredNames
       atom.config.set 'core.ignoredNames', collectedDotHiddenIgnoredNames
-      atom.config.set 'dot-hide.hidden', true
+      @hidden = true
 
   show : =>
     savedIgnoredNames = atom.config.get 'dot-hide.savedIgnoredNames'
@@ -39,13 +38,13 @@ class DotHide
     else
       atom.config.set 'core.ignoredNames', []
     atom.config.set 'dot-hide.savedIgnoredNames', []
-    atom.config.set 'dot-hide.hidden', false
+    @hidden = false
 
   toggle : =>
-    if atom.config.get 'dot-hide.hidden' then @show() else @hide()
+    if @hidden then @show() else @hide()
 
   onActivate : =>
-    hidden = atom.config.get 'dot-hide.hidden'
+    hidden = @hidden
     @show()
     if hidden and atom.config.get 'dot-hide.autoHide' then @hide()
 
