@@ -16,7 +16,7 @@ module.exports =
     atom.commands.add "atom-workspace", "dot-hide:show", @dotHide.show
     atom.commands.add "atom-workspace", "dot-hide:hide", @dotHide.hide
     atom.commands.add "atom-workspace", "dot-hide:toggle", @dotHide.toggle
-    @dotHide.onActivate()
+    @dotHide.activate()
 
   serialize: -> @dotHide.serialize()
 
@@ -35,7 +35,6 @@ class DotHide
   constructor: ({hidden, savedIgnoredNames} = {hidden: false, savedIgnoredNames: []}) ->
     @hidden = hidden
     @savedIgnoredNames = savedIgnoredNames
-    console.log this
 
   hide : =>
     collectedDotHiddenIgnoredNames = []
@@ -67,7 +66,7 @@ class DotHide
   toggle : =>
     if @hidden then @show() else @hide()
 
-  onActivate : =>
+  activate : =>
     hidden = @hidden
     @show()
     if hidden and atom.config.get 'dot-hide.autoHide' then @hide()
