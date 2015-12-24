@@ -25,8 +25,8 @@ class DotHide
 
   atom.deserializers.add this
   @version: 2
-  @deserialize: (state) -> new DotHide(state)
-  serialize: ->
+  @deserialize: (state) => new DotHide(state)
+  serialize: =>
     deserializer: 'DotHide'
     version: @constructor.version
     hidden: @hidden
@@ -36,7 +36,7 @@ class DotHide
     @hidden = hidden
     @savedIgnoredNames = savedIgnoredNames
 
-  hide : ->
+  hide : =>
     collectedDotHiddenIgnoredNames = []
     for project in atom.project.getPaths() #BUG: API returns list, yet isn't all open projects.
       filePath = project + '/.hidden'
@@ -54,7 +54,7 @@ class DotHide
       atom.config.set 'core.ignoredNames', collectedDotHiddenIgnoredNames
       @hidden = true
 
-  show : ->
+  show : =>
     savedIgnoredNames = @savedIgnoredNames
     if savedIgnoredNames?
       atom.config.set 'core.ignoredNames', savedIgnoredNames
@@ -63,10 +63,10 @@ class DotHide
     @savedIgnoredNames = []
     @hidden = false
 
-  toggle : ->
+  toggle : =>
     if @hidden then @show() else @hide()
 
-  activate : ->
+  activate : =>
     hidden = @hidden
     @show()
     if hidden and atom.config.get 'dot-hide.autoHide' then @hide()
